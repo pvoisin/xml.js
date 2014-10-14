@@ -4,16 +4,20 @@ var Utility = require("../../source/Utility");
 var XML = require("../../source/XML");
 
 describe("XML", function() {
+	var document = XML.load(Path.resolve(__dirname, "../fixtures/example.xml"));
+	var root = XML.query(document, "/*")[0];
+
 	describe("#load", function() {
 		it("should load properly", function() {
-			var document = XML.load(Path.resolve(__dirname, "../fixtures/example.xml"));
 			expect(document).to.be.ok();
+		});
+
+		it("should convert XML nodes properly", function() {
+			expect(XML.convert(root)).to.eql(require("../fixtures/example.json"));
 		});
 	});
 
 	describe("JXON", function() {
-		var document = XML.load(Path.resolve(__dirname, "../fixtures/example.xml"));
-
 		describe("transformers", function() {
 			describe("#ELEMENT", function() {
 				var transformer = XML.JXON.transformers["#ELEMENT"];
@@ -83,12 +87,10 @@ describe("XML", function() {
 
 		describe("#convert", function() {
 			it("should convert XML documents properly", function() {
-				var root = XML.query(document, "/*")[0];
 				expect(XML.JXON.convert(root)).to.eql(require("../fixtures/example.json"));
 			});
 
 			it("should convert XML documents properly, in compact mode", function() {
-				var root = XML.query(document, "/*")[0];
 				expect(XML.JXON.convert(root, true)).to.eql(require("../fixtures/example-compact.json"));
 			});
 		});

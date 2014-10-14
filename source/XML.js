@@ -46,8 +46,8 @@ var XML = {
 		return evaluate(expression, node);
 	},
 
-	toJXON: function toJXON() {
-		var transformers = this.JXON.transformers;
+	convert: function convert(node, compact) {
+		return XML.JXON.convert(node, compact);
 	}
 };
 

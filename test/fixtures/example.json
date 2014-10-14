@@ -1,229 +1,231 @@
-{"catalog": {
-	"children": [
-		{
-			"#TEXT": "\n    "
-		},
-		{
-			"#COMMENT": " Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml "
-		},
-		{
-			"#TEXT": "\n    "
-		},
-		{
-			"product": {
-				"@description": "Cardigan Sweater",
-				"children": [
-					{
-						"#TEXT": "\n        "
-					},
-					{
-						"catalog_item": {
-							"@gender": "Men's",
-							"children": [
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"item_number": {
-										"children": [
-											{
-												"#TEXT": "QWZ5671"
-											}
-										]
-									}
-								},
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"price": {
-										"children": [
-											{
-												"#TEXT": "39.95"
-											}
-										]
-									}
-								},
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"size": {
-										"@description": "Medium",
-										"children": [
-											{
-												"#TEXT": "\n                "
-											},
-											{
-												"color_swatch": {
-													"@image": "red_cardigan.jpg",
-													"children": [
-														{
-															"#TEXT": "Red"
-														}
-													]
+{
+	"catalog": {
+		"children": [
+			{
+				"#TEXT": "\n    "
+			},
+			{
+				"#COMMENT": " Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml "
+			},
+			{
+				"#TEXT": "\n    "
+			},
+			{
+				"product": {
+					"@description": "Cardigan Sweater",
+					"children": [
+						{
+							"#TEXT": "\n        "
+						},
+						{
+							"catalog_item": {
+								"@gender": "Men's",
+								"children": [
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"item_number": {
+											"children": [
+												{
+													"#TEXT": "QWZ5671"
 												}
-											},
-											{
-												"#TEXT": "\n                "
-											},
-											{
-												"color_swatch": {
-													"@image": "burgundy_cardigan.jpg",
-													"children": [
-														{
-															"#TEXT": "Burgundy"
-														}
-													]
+											]
+										}
+									},
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"price": {
+											"children": [
+												{
+													"#TEXT": "39.95"
 												}
-											},
-											{
-												"#TEXT": "\n            "
-											}
-										]
+											]
+										}
+									},
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"size": {
+											"@description": "Medium",
+											"children": [
+												{
+													"#TEXT": "\n                "
+												},
+												{
+													"color_swatch": {
+														"@image": "red_cardigan.jpg",
+														"children": [
+															{
+																"#TEXT": "Red"
+															}
+														]
+													}
+												},
+												{
+													"#TEXT": "\n                "
+												},
+												{
+													"color_swatch": {
+														"@image": "burgundy_cardigan.jpg",
+														"children": [
+															{
+																"#TEXT": "Burgundy"
+															}
+														]
+													}
+												},
+												{
+													"#TEXT": "\n            "
+												}
+											]
+										}
+									},
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"size": {
+											"@description": "Large",
+											"children": [
+												{
+													"#TEXT": "\n                "
+												},
+												{
+													"color_swatch": {
+														"@image": "red_cardigan.jpg",
+														"children": [
+															{
+																"#TEXT": "Red"
+															}
+														]
+													}
+												},
+												{
+													"#TEXT": "\n                "
+												},
+												{
+													"color_swatch": {
+														"@image": "burgundy_cardigan.jpg",
+														"children": [
+															{
+																"#TEXT": "Burgundy"
+															}
+														]
+													}
+												},
+												{
+													"#TEXT": "\n            "
+												}
+											]
+										}
+									},
+									{
+										"#TEXT": "\n        "
 									}
-								},
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"size": {
-										"@description": "Large",
-										"children": [
-											{
-												"#TEXT": "\n                "
-											},
-											{
-												"color_swatch": {
-													"@image": "red_cardigan.jpg",
-													"children": [
-														{
-															"#TEXT": "Red"
-														}
-													]
+								]
+							}
+						},
+						{
+							"#TEXT": "\n        "
+						},
+						{
+							"catalog_item": {
+								"@gender": "Women's",
+								"children": [
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"item_number": {
+											"children": [
+												{
+													"#TEXT": "RRX9856"
 												}
-											},
-											{
-												"#TEXT": "\n                "
-											},
-											{
-												"color_swatch": {
-													"@image": "burgundy_cardigan.jpg",
-													"children": [
-														{
-															"#TEXT": "Burgundy"
-														}
-													]
+											]
+										}
+									},
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"discount_until": {
+											"children": [
+												{
+													"#TEXT": "Dec 25, 1995"
 												}
-											},
-											{
-												"#TEXT": "\n            "
-											}
-										]
+											]
+										}
+									},
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"price": {
+											"children": [
+												{
+													"#TEXT": "42.50"
+												}
+											]
+										}
+									},
+									{
+										"#TEXT": "\n            "
+									},
+									{
+										"size": {
+											"@description": "Medium",
+											"children": [
+												{
+													"#TEXT": "\n                "
+												},
+												{
+													"color_swatch": {
+														"@image": "black_cardigan.jpg",
+														"children": [
+															{
+																"#TEXT": "Black"
+															}
+														]
+													}
+												},
+												{
+													"#TEXT": "\n            "
+												}
+											]
+										}
+									},
+									{
+										"#TEXT": "\n        "
 									}
-								},
-								{
-									"#TEXT": "\n        "
-								}
-							]
+								]
+							}
+						},
+						{
+							"#TEXT": "\n    "
 						}
-					},
-					{
-						"#TEXT": "\n        "
-					},
-					{
-						"catalog_item": {
-							"@gender": "Women's",
-							"children": [
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"item_number": {
-										"children": [
-											{
-												"#TEXT": "RRX9856"
-											}
-										]
-									}
-								},
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"discount_until": {
-										"children": [
-											{
-												"#TEXT": "Dec 25, 1995"
-											}
-										]
-									}
-								},
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"price": {
-										"children": [
-											{
-												"#TEXT": "42.50"
-											}
-										]
-									}
-								},
-								{
-									"#TEXT": "\n            "
-								},
-								{
-									"size": {
-										"@description": "Medium",
-										"children": [
-											{
-												"#TEXT": "\n                "
-											},
-											{
-												"color_swatch": {
-													"@image": "black_cardigan.jpg",
-													"children": [
-														{
-															"#TEXT": "Black"
-														}
-													]
-												}
-											},
-											{
-												"#TEXT": "\n            "
-											}
-										]
-									}
-								},
-								{
-									"#TEXT": "\n        "
-								}
-							]
+					]
+				}
+			},
+			{
+				"#TEXT": "\n    "
+			},
+			{
+				"script": {
+					"@type": "text/javascript",
+					"children": [
+						{
+							"#CDATA": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
 						}
-					},
-					{
-						"#TEXT": "\n    "
-					}
-				]
+					]
+				}
+			},
+			{
+				"#TEXT": "\n"
 			}
-		},
-		{
-			"#TEXT": "\n    "
-		},
-		{
-			"script": {
-				"@type": "text/javascript",
-				"children": [
-					{
-						"#CDATA": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
-					}
-				]
-			}
-		},
-		{
-			"#TEXT": "\n"
-		}
-	]
-}}
+		]
+	}
+}

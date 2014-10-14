@@ -1,0 +1,156 @@
+{
+	"catalog": {
+		"*": [
+			{
+				"#C": "Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml"
+			},
+			{
+				"product": {
+					"description": "Cardigan Sweater",
+					"*": [
+						{
+							"catalog_item": {
+								"gender": "Men's",
+								"*": [
+									{
+										"item_number": {
+											"*": [
+												{
+													"#T": "QWZ5671"
+												}
+											]
+										}
+									},
+									{
+										"price": {
+											"*": [
+												{
+													"#T": "39.95"
+												}
+											]
+										}
+									},
+									{
+										"size": {
+											"description": "Medium",
+											"*": [
+												{
+													"color_swatch": {
+														"image": "red_cardigan.jpg",
+														"*": [
+															{
+																"#T": "Red"
+															}
+														]
+													}
+												},
+												{
+													"color_swatch": {
+														"image": "burgundy_cardigan.jpg",
+														"*": [
+															{
+																"#T": "Burgundy"
+															}
+														]
+													}
+												}
+											]
+										}
+									},
+									{
+										"size": {
+											"description": "Large",
+											"*": [
+												{
+													"color_swatch": {
+														"image": "red_cardigan.jpg",
+														"*": [
+															{
+																"#T": "Red"
+															}
+														]
+													}
+												},
+												{
+													"color_swatch": {
+														"image": "burgundy_cardigan.jpg",
+														"*": [
+															{
+																"#T": "Burgundy"
+															}
+														]
+													}
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"catalog_item": {
+								"gender": "Women's",
+								"*": [
+									{
+										"item_number": {
+											"*": [
+												{
+													"#T": "RRX9856"
+												}
+											]
+										}
+									},
+									{
+										"discount_until": {
+											"*": [
+												{
+													"#T": "Dec 25, 1995"
+												}
+											]
+										}
+									},
+									{
+										"price": {
+											"*": [
+												{
+													"#T": "42.50"
+												}
+											]
+										}
+									},
+									{
+										"size": {
+											"description": "Medium",
+											"*": [
+												{
+													"color_swatch": {
+														"image": "black_cardigan.jpg",
+														"*": [
+															{
+																"#T": "Black"
+															}
+														]
+													}
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"script": {
+					"type": "text/javascript",
+					"*": [
+						{
+							"#D": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
+						}
+					]
+				}
+			}
+		]
+	}
+}
