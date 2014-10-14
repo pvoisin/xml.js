@@ -1,6 +1,6 @@
 {
   "name": "xml.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "XML",
     "JXON",
@@ -9,17 +9,20 @@
   "authors": [
     "Pierre Voisin <pierre.voisin@gmail.com>"
   ],
-  "repository": "ssh://git@github.com:pvoisin/xml.js.git",
+  "repository": "https://github.com/pvoisin/xml.js.git",
   "main": "source/XML.js",
   "devDependencies": {
     "grunt": "~0.4.5",
-    "lodash": "~2.4.1",
     "expect.js": "~0.3.1",
     "grunt-mocha-test": "~0.12.1",
     "mocha": "~1.21.5"
   },
   "dependencies": {
     "xmldom": "~0.1.19",
-    "xpath": "0.0.7"
+    "xpath": "0.0.7",
+	 "lodash": "~2.4.1"
+  },
+  "scripts": {
+    "test": "grunt test"
   }
 }
