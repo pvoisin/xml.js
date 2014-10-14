@@ -25,10 +25,27 @@ var XML = {
 
 	/**
 	 * @param {String} file XML file to load.
+	 * @param {Object} [options] Options:
+	 *   - {Boolean} convert Tells whether the document should be converted into JXON
+	 *   - {Boolean} compact Tells whether the document should be converted into its compact form
 	 * @return {Document}
 	 */
-	load: function load(file) {
-		return XML.parse(String(FileSystem.readFileSync(file)));
+	load: function load(file, options) {
+		var document = String(FileSystem.readFileSync(file));
+		document = XML.parse(document);
+
+		options = Utility.merge({}, {
+			convert: false,
+			compact: false
+		}, options);
+
+		options.convert |= !!options.compact;
+
+		if(options.convert) {
+			document = this.convert(document, Utility.pick(options, ["compact"]));
+		}
+
+		return document;
 	},
 
 	/**
@@ -45,9 +62,17 @@ var XML = {
 
 		return evaluate(expression, node);
 	},
+	/**
+	 * @param {Object} node Node to convert into JXON
+	 * @param {Object} [options] Options:
+	 *   - {Boolean} compact Tells whether the node should be converted into its compact form
+	 */
+	convert: function convert(node, options) {
+		options = Utility.merge({}, {
+			compact: false
+		}, options);
 
-	convert: function convert(node, compact) {
-		return XML.JXON.convert(node, compact);
+		return XML.JXON.convert(node, options.compact);
 	}
 };
 
@@ -56,7 +81,7 @@ XML.JXON = {
 	transformers: (function() {
 		var transformers = {
 			"#DOCUMENT": function(node, compact) {
-				return transformers["#ELEMENT"](node.firstChild, compact);
+				return transformers["#ELEMENT"](node.documentElement, compact);
 			},
 
 			"#ELEMENT": function(node, compact) {

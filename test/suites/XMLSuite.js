@@ -4,7 +4,8 @@ var Utility = require("../../source/Utility");
 var XML = require("../../source/XML");
 
 describe("XML", function() {
-	var document = XML.load(Path.resolve(__dirname, "../fixtures/example.xml"));
+	var fixture = Path.resolve(__dirname, "../fixtures/example.xml");
+	var document = XML.load(fixture);
 	var root = XML.query(document, "/*")[0];
 
 	describe("#load", function() {
@@ -12,8 +13,16 @@ describe("XML", function() {
 			expect(document).to.be.ok();
 		});
 
+		it("should load properly, into some JXON object", function() {
+			expect(XML.load(fixture, {convert: true})).to.eql(require("../fixtures/example.json"));
+			expect(XML.load(fixture, {convert: true, compact: true})).to.eql(require("../fixtures/example-compact.json"));
+			expect(XML.load(fixture, {compact: true})).to.eql(require("../fixtures/example-compact.json"));
+		});
+	});
+
+	describe("#convert", function() {
 		it("should convert XML nodes properly", function() {
-			expect(XML.convert(root)).to.eql(require("../fixtures/example.json"));
+			expect(XML.convert(document)).to.eql(require("../fixtures/example.json"));
 		});
 	});
 
