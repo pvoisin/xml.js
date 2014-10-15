@@ -1,0 +1,34 @@
+<user id="123">
+    <!-- Address: -->
+    <address city="Montréal" country="Canada">
+        1, pl. Ville-Marie
+    </address>
+
+    <!-- - - - - - -->
+    TEXT
+    <!-- Contacts: -->
+    <!-- - - - - - -->
+    <contacts>
+        <contact firstName="John" lastName="Bird"/>
+        <contact firstName="George" lastName="Cartier">
+            <notes>
+                <![CDATA[
+                    Will call back tomorrow.
+                ]]>
+            </notes>
+        </contact>
+        <contact firstName="Normand" lastName="Larivière">
+            <notes>
+                <![CDATA[
+                    Friend of George.
+                ]]>
+                <![CDATA[
+                    Asked for an appointment.
+                ]]>
+            </notes>
+        </contact>
+    </contacts>
+    <hidden:notes>
+        Salut !
+    </hidden:notes>
+</user>

@@ -1,0 +1,70 @@
+{
+	"user": {
+		"id": "123",
+		"*": [
+			{
+				"#C": "Address:"
+			},
+			{
+				"address": {
+					"city": "Montréal",
+					"country": "Canada",
+					"*": "1, pl. Ville-Marie"
+				}
+			},
+			{
+				"#C": "- - - - -"
+			},
+			"TEXT",
+			{
+				"#C": "Contacts:\n- - - - -"
+			},
+			{
+				"contacts": {
+					"*": [
+						{
+							"contact": {
+								"firstName": "John",
+								"lastName": "Bird"
+							}
+						},
+						{
+							"contact": {
+								"firstName": "George",
+								"lastName": "Cartier",
+								"*": {
+									"notes": {
+										"*": {
+											"#D": "Will call back tomorrow."
+										}
+									}
+								}
+							}
+						},
+						{
+							"contact": {
+								"firstName": "Normand",
+								"lastName": "Larivière",
+								"*": {
+									"notes": {
+										"*": [
+											{
+												"#D": "Friend of George."
+											},
+											{
+												"#D": "Asked for an appointment."
+											}
+										]
+									}
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"hidden:notes": "Salut !"
+			}
+		]
+	}
+}

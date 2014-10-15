@@ -2,6 +2,7 @@ var Path = require("path");
 var expect = require("expect.js");
 var Utility = require("../../source/Utility");
 var XML = require("../../source/XML");
+var JXON = XML.JXON;
 
 describe("XML", function() {
 	var fixture = Path.resolve(__dirname, "../fixtures/example.xml");
@@ -14,93 +15,116 @@ describe("XML", function() {
 		});
 
 		it("should load properly, into some JXON object", function() {
-			expect(XML.load(fixture, {convert: true})).to.eql(require("../fixtures/example.json"));
-			expect(XML.load(fixture, {convert: true, compact: true})).to.eql(require("../fixtures/example-compact.json"));
-			expect(XML.load(fixture, {compact: true})).to.eql(require("../fixtures/example-compact.json"));
-		});
-	});
-
-	describe("#convert", function() {
-		it("should convert XML nodes properly", function() {
-			expect(XML.convert(document)).to.eql(require("../fixtures/example.json"));
+			expect(XML.load(fixture, true)).to.eql(require("../fixtures/example-compact.json"));
+			expect(XML.load(Path.resolve(__dirname, "../fixtures/user.xml"), true)).to.eql(require("../fixtures/user-compact.json"));
 		});
 	});
 
 	describe("JXON", function() {
 		describe("transformers", function() {
 			describe("#ELEMENT", function() {
-				var transformer = XML.JXON.transformers["#ELEMENT"];
+				var transformer = JXON.transformers["#ELEMENT"];
 				var node = XML.query(document, "//color_swatch")[0];
 
 				it("should transform elements properly", function() {
-					expect(transformer(node)).to.eql({"color_swatch": {
-						"@image": "red_cardigan.jpg",
-						"children": [
-							{"#TEXT": "Red"}
-						]}
+					expect(transformer(node)).to.eql({
+						"color_swatch": {
+							"@image": "red_cardigan.jpg",
+							"children": [
+								{"#TEXT": "Red"}
+							]
+						}
 					});
 				});
-
-				it("should transform elements properly, in compact mode", function() {
-					expect(transformer(node, true)).to.eql({"color_swatch": {
-						"image": "red_cardigan.jpg",
-						"*": [
-							{"#T": "Red"}
-						]}
-					});
-				});
-
 			});
 
 			describe("#ATTRIBUTE", function() {
-				var transformer = XML.JXON.transformers["#ATTRIBUTE"];
+				var transformer = JXON.transformers["#ATTRIBUTE"];
 				var node = XML.query(document, "//product[1]/@description")[0];
 
 				it("should transform text nodes properly", function() {
 					expect(transformer(node)).to.eql({"@description": "Cardigan Sweater"});
 				});
-
-				it("should transform text nodes properly, in compact mode", function() {
-					expect(transformer(node, true)).to.eql({"description": "Cardigan Sweater"});
-				});
 			});
 
 			describe("#TEXT", function() {
-				var transformer = XML.JXON.transformers["#TEXT"];
+				var transformer = JXON.transformers["#TEXT"];
 				var node = XML.query(document, "//item_number[1]/text()")[0];
 				var text = "QWZ5671";
 
 				it("should transform text nodes properly", function() {
 					expect(transformer(node)).to.eql({"#TEXT": text});
 				});
-
-				it("should transform text nodes properly, in compact mode", function() {
-					expect(transformer(node, true)).to.eql({"#T": text});
-				});
 			});
 
 			describe("#CDATA", function() {
-				var transformer = XML.JXON.transformers["#CDATA"];
+				var transformer = JXON.transformers["#CDATA"];
 				var node = XML.query(document, "//script/text()")[0];
 				var text = "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}";
 
 				it("should transform CDATA sections properly", function() {
 					expect(transformer(node)).to.eql({"#CDATA": text});
 				});
-
-				it("should transform CDATA sections properly, in compact mode", function() {
-					expect(transformer(node, true)).to.eql({"#D": text});
-				});
 			});
 		});
 
 		describe("#convert", function() {
 			it("should convert XML documents properly", function() {
-				expect(XML.JXON.convert(root)).to.eql(require("../fixtures/example.json"));
+				expect(JXON.convert(root)).to.eql(require("../fixtures/example.json"));
 			});
 
 			it("should convert XML documents properly, in compact mode", function() {
-				expect(XML.JXON.convert(root, true)).to.eql(require("../fixtures/example-compact.json"));
+				expect(JXON.convert(root, true)).to.eql(require("../fixtures/example-compact.json"));
+			});
+		});
+
+		describe("compactors", function() {
+			var fixture = Path.resolve(__dirname, "../fixtures/user.xml");
+			var document = XML.load(fixture);
+
+			describe("#ELEMENT", function() {
+				it("should compact objects properly", function() {
+					var object = JXON.convert(document);
+					expect(JXON.compactors["#ELEMENT"](object)).to.eql(require("../fixtures/user-compact.json"));
+				});
+			});
+
+			describe("#ATTRIBUTE", function() {
+				it("should compact objects properly", function() {
+					var node = XML.query(document, "//contact[1]")[0];
+					var object = JXON.convert(node);
+					expect(object).to.eql({"contact":{"@firstName": "John", "@lastName": "Bird", children: []}});
+					expect(JXON.compactors["#ATTRIBUTE"]("@firstName", object)).to.eql({"contact":{"firstName": "John", "@lastName": "Bird", children: []}});
+				});
+			});
+
+			describe("#TEXT", function() {
+				it("should compact objects properly", function() {
+					expect(JXON.compactors["#TEXT"]({"#TEXT": "\r\n??? \t"})).to.eql("???");
+					expect(JXON.compactors["#TEXT"]({"#TEXT": "\n\t \r"})).to.be(null);
+				});
+			});
+
+			describe("#CDATA", function() {
+				it("should compact objects properly", function() {
+					expect(JXON.compactors["#CDATA"]({"#CDATA": "\r\n??? \t"})).to.eql({"#D": "???"});
+					expect(JXON.compactors["#CDATA"]({"#CDATA": "\n\t \r"})).to.be(null);
+				});
+			});
+
+			describe("#COMMENT", function() {
+				it("should compact objects properly", function() {
+					expect(JXON.compactors["#COMMENT"]({"#COMMENT": "\r\n??? \t"})).to.eql({"#C": "???"});
+					expect(JXON.compactors["#COMMENT"]({"#COMMENT": "\n\t \r"})).to.be(null);
+				});
+			});
+		});
+
+		describe("#compact", function() {
+			it("should compact JXON objects properly", function() {
+				var fixture = Path.resolve(__dirname, "../fixtures/user.xml");
+				var proof = require("../fixtures/user-compact.json");
+				expect(JXON.compact(XML.load(fixture, true))).to.eql(proof);
 			});
 		});
 	});

@@ -1,0 +1,138 @@
+{"user": {
+	"@id": "123",
+	"children": [
+		{
+			"#TEXT": "\n    "
+		},
+		{
+			"#COMMENT": " Address: "
+		},
+		{
+			"#TEXT": "\n    "
+		},
+		{
+			"address": {
+				"@city": "Montréal",
+				"@country": "Canada",
+				"children": [
+					{
+						"#TEXT": "\n        1, pl. Ville-Marie\n    "
+					}
+				]
+			}
+		},
+		{
+			"#TEXT": "\n\n    "
+		},
+		{
+			"#COMMENT": " - - - - - "
+		},
+		{
+			"#TEXT": "\n    TEXT\n    "
+		},
+		{
+			"#COMMENT": " Contacts: "
+		},
+		{
+			"#TEXT": "\n    "
+		},
+		{
+			"#COMMENT": " - - - - - "
+		},
+		{
+			"#TEXT": "\n    "
+		},
+		{
+			"contacts": {
+				"children": [
+					{
+						"#TEXT": "\n        "
+					},
+					{
+						"contact": {
+							"@firstName": "John",
+							"@lastName": "Bird",
+							"children": []
+						}
+					},
+					{
+						"#TEXT": "\n        "
+					},
+					{
+						"contact": {
+							"@firstName": "George",
+							"@lastName": "Cartier",
+							"children": [
+								{
+									"#TEXT": "\n            "
+								},
+								{
+									"notes": {
+										"children": [
+											{
+												"#TEXT": "\n                "
+											},
+											{
+												"#CDATA": "\n                    Will call back tomorrow.\n                "
+											},
+											{
+												"#TEXT": "\n            "
+											}
+										]
+									}
+								},
+								{
+									"#TEXT": "\n        "
+								}
+							]
+						}
+					},
+					{
+						"#TEXT": "\n        "
+					},
+					{
+						"contact": {
+							"@firstName": "Normand",
+							"@lastName": "Larivière",
+							"children": [
+								{
+									"#TEXT": "\n            "
+								},
+								{
+									"notes": {
+										"children": [
+											{
+												"#TEXT": "\n                "
+											},
+											{
+												"#CDATA": "\n                    Friend of George.\n                "
+											},
+											{
+												"#TEXT": "\n                "
+											},
+											{
+												"#CDATA": "\n                    Asked for an appointment.\n                "
+											},
+											{
+												"#TEXT": "\n            "
+											}
+										]
+									}
+								},
+								{
+									"#TEXT": "\n        "
+								}
+							]
+						}
+					},
+					{
+						"#TEXT": "\n    "
+					}
+				]
+			}
+		},
+		{
+			"#TEXT": "\n"
+		}
+	]
+}}

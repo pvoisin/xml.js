@@ -1,446 +1,112 @@
 # XML.js
+## What for?
+XML.js provides helper functions for XML manipulation, including conversion of documents into [JXON](https://developer.mozilla.org/en-US/docs/JXON) objects.
+It is built on top of [xmldom](https://www.npmjs.org/package/xmldom) & [xpath](https://www.npmjs.org/package/xpath) modules and brings common XML-related features together into a simplistic API.
 
-## Example
+## API
 
-Let's say you have the following XML file:
-
-```xml
-<catalog>
-    <!-- Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml -->
-    <product description="Cardigan Sweater">
-        <catalog_item gender="Men's">
-            <item_number>QWZ5671</item_number>
-            <price>39.95</price>
-            <size description="Medium">
-                <color_swatch image="red_cardigan.jpg">Red</color_swatch>
-                <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
-            </size>
-            <size description="Large">
-                <color_swatch image="red_cardigan.jpg">Red</color_swatch>
-                <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
-            </size>
-        </catalog_item>
-        <catalog_item gender="Women's">
-            <item_number>RRX9856</item_number>
-            <discount_until>Dec 25, 1995</discount_until>
-            <price>42.50</price>
-            <size description="Medium">
-                <color_swatch image="black_cardigan.jpg">Black</color_swatch>
-            </size>
-        </catalog_item>
-    </product>
-    <script type="text/javascript"><![CDATA[function matchwo(a,b) {
-    if (a < b && a < 0) { return 1; }
-    else { return 0; }
-}]]></script>
-</catalog>
-```
-
-Instructions below would turn it into some [JXON](https://developer.mozilla.org/en-US/docs/JXON) object: 
-
+### XML#parse
 ```javascript
-var XML = require("xml.js");
-
-var document = XML.load(Path.resolve(__dirname, "../fixtures/example.xml"));
-var root = XML.query(document, "/*")[0];
-var object = XML.convert(root);
+function parse(text) { ... //-> DOMDocument
 ```
 
-With `object` being the following:
+### XML#load
+```javascript
+function load(file, [convert:false]) { ... //-> DOMDocument
+```
 
+### XML#serialize
+```javascript
+function serialize(node) { ... //-> String
+```
+
+### XML#query
+```javascript
+function query(node, expression, resolver) { ... //-> [Node]
+```
+
+####Examples
+```javascript
+XML.query(document, "//book[1]");
+XML.query(response, "//xyz:object/property[@name='title']", {"xyz": "http://xyz.com/1.0/"});
+```
+
+
+
+## JXON
+
+### convert
+```javascript
+function convert(node, [compact:true]) { ... //-> {Object}
+```
+
+####Example
+Given, `document` is the following:
+```xml
+<contact firstName="George" lastName="Cartier">
+    <notes>
+        <![CDATA[
+            Will call back tomorrow.
+        ]]>
+    </notes>
+</contact>
+```
+JXON object, converted with `JXON.convert(document)`, would be:
+<a name="JXON_convert_result"></a>
 ```javascript
 {
-	"catalog": {
+	"contact": {
+		"firstName": "George",
+		"lastName": "Cartier",
+		"*": {
+			"notes": {
+				"*": {
+					"#D": "Will call back tomorrow."
+				}
+			}
+		}
+	}
+}
+```
+
+### compact
+```javascript
+function compact(object) { ... //-> {Object}
+```
+####Example
+When not compacted, [previous result](#JXON_convert_result) would be the following, which could be compacted afterwards with `JXON#compact`:
+```javascript
+{
+	"contact": {
+		"@firstName": "George",
+		"@lastName": "Cartier",
 		"children": [
 			{
-				"#TEXT": "\n    "
+				"#TEXT": "\n            "
 			},
 			{
-				"#COMMENT": " Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml "
-			},
-			{
-				"#TEXT": "\n    "
-			},
-			{
-				"product": {
-					"@description": "Cardigan Sweater",
+				"notes": {
 					"children": [
 						{
-							"#TEXT": "\n        "
+							"#TEXT": "\n                "
 						},
 						{
-							"catalog_item": {
-								"@gender": "Men's",
-								"children": [
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"item_number": {
-											"children": [
-												{
-													"#TEXT": "QWZ5671"
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"price": {
-											"children": [
-												{
-													"#TEXT": "39.95"
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"size": {
-											"@description": "Medium",
-											"children": [
-												{
-													"#TEXT": "\n                "
-												},
-												{
-													"color_swatch": {
-														"@image": "red_cardigan.jpg",
-														"children": [
-															{
-																"#TEXT": "Red"
-															}
-														]
-													}
-												},
-												{
-													"#TEXT": "\n                "
-												},
-												{
-													"color_swatch": {
-														"@image": "burgundy_cardigan.jpg",
-														"children": [
-															{
-																"#TEXT": "Burgundy"
-															}
-														]
-													}
-												},
-												{
-													"#TEXT": "\n            "
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"size": {
-											"@description": "Large",
-											"children": [
-												{
-													"#TEXT": "\n                "
-												},
-												{
-													"color_swatch": {
-														"@image": "red_cardigan.jpg",
-														"children": [
-															{
-																"#TEXT": "Red"
-															}
-														]
-													}
-												},
-												{
-													"#TEXT": "\n                "
-												},
-												{
-													"color_swatch": {
-														"@image": "burgundy_cardigan.jpg",
-														"children": [
-															{
-																"#TEXT": "Burgundy"
-															}
-														]
-													}
-												},
-												{
-													"#TEXT": "\n            "
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n        "
-									}
-								]
-							}
+							"#CDATA": "\n                    Will call back tomorrow.\n                "
 						},
 						{
-							"#TEXT": "\n        "
-						},
-						{
-							"catalog_item": {
-								"@gender": "Women's",
-								"children": [
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"item_number": {
-											"children": [
-												{
-													"#TEXT": "RRX9856"
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"discount_until": {
-											"children": [
-												{
-													"#TEXT": "Dec 25, 1995"
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"price": {
-											"children": [
-												{
-													"#TEXT": "42.50"
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n            "
-									},
-									{
-										"size": {
-											"@description": "Medium",
-											"children": [
-												{
-													"#TEXT": "\n                "
-												},
-												{
-													"color_swatch": {
-														"@image": "black_cardigan.jpg",
-														"children": [
-															{
-																"#TEXT": "Black"
-															}
-														]
-													}
-												},
-												{
-													"#TEXT": "\n            "
-												}
-											]
-										}
-									},
-									{
-										"#TEXT": "\n        "
-									}
-								]
-							}
-						},
-						{
-							"#TEXT": "\n    "
+							"#TEXT": "\n            "
 						}
 					]
 				}
 			},
 			{
-				"#TEXT": "\n    "
-			},
-			{
-				"script": {
-					"@type": "text/javascript",
-					"children": [
-						{
-							"#CDATA": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
-						}
-					]
-				}
-			},
-			{
-				"#TEXT": "\n"
+				"#TEXT": "\n        "
 			}
 		]
 	}
 }
 ```
 
-There's also a "compact" mode which gives lighter results:
+## More?
 
-```javascript
-{
-	"catalog": {
-		"*": [
-			{
-				"#C": "Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml"
-			},
-			{
-				"product": {
-					"description": "Cardigan Sweater",
-					"*": [
-						{
-							"catalog_item": {
-								"gender": "Men's",
-								"*": [
-									{
-										"item_number": {
-											"*": [
-												{
-													"#T": "QWZ5671"
-												}
-											]
-										}
-									},
-									{
-										"price": {
-											"*": [
-												{
-													"#T": "39.95"
-												}
-											]
-										}
-									},
-									{
-										"size": {
-											"description": "Medium",
-											"*": [
-												{
-													"color_swatch": {
-														"image": "red_cardigan.jpg",
-														"*": [
-															{
-																"#T": "Red"
-															}
-														]
-													}
-												},
-												{
-													"color_swatch": {
-														"image": "burgundy_cardigan.jpg",
-														"*": [
-															{
-																"#T": "Burgundy"
-															}
-														]
-													}
-												}
-											]
-										}
-									},
-									{
-										"size": {
-											"description": "Large",
-											"*": [
-												{
-													"color_swatch": {
-														"image": "red_cardigan.jpg",
-														"*": [
-															{
-																"#T": "Red"
-															}
-														]
-													}
-												},
-												{
-													"color_swatch": {
-														"image": "burgundy_cardigan.jpg",
-														"*": [
-															{
-																"#T": "Burgundy"
-															}
-														]
-													}
-												}
-											]
-										}
-									}
-								]
-							}
-						},
-						{
-							"catalog_item": {
-								"gender": "Women's",
-								"*": [
-									{
-										"item_number": {
-											"*": [
-												{
-													"#T": "RRX9856"
-												}
-											]
-										}
-									},
-									{
-										"discount_until": {
-											"*": [
-												{
-													"#T": "Dec 25, 1995"
-												}
-											]
-										}
-									},
-									{
-										"price": {
-											"*": [
-												{
-													"#T": "42.50"
-												}
-											]
-										}
-									},
-									{
-										"size": {
-											"description": "Medium",
-											"*": [
-												{
-													"color_swatch": {
-														"image": "black_cardigan.jpg",
-														"*": [
-															{
-																"#T": "Black"
-															}
-														]
-													}
-												}
-											]
-										}
-									}
-								]
-							}
-						}
-					]
-				}
-			},
-			{
-				"script": {
-					"type": "text/javascript",
-					"*": [
-						{
-							"#D": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
-						}
-					]
-				}
-			}
-		]
-	}
-}
-```
-
-Enjoy! :)
+Please have a look to the test [fixtures](blob/master/test/fixtures)!
