@@ -66,7 +66,7 @@ var JXON = {
 
 		var object = transformer(node);
 
-		return compact ? this.compact(object) : object;
+		return compact || !Utility.isDefined(compact) ? this.compact(object) : object;
 	},
 
 	/**

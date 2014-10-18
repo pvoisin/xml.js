@@ -70,11 +70,11 @@ describe("XML", function() {
 
 		describe("#convert", function() {
 			it("should convert XML documents properly", function() {
-				expect(JXON.convert(root)).to.eql(require("../fixtures/example.json"));
+				expect(JXON.convert(root, false)).to.eql(require("../fixtures/example.json"));
 			});
 
 			it("should convert XML documents properly, in compact mode", function() {
-				expect(JXON.convert(root, true)).to.eql(require("../fixtures/example-compact.json"));
+				expect(JXON.convert(root)).to.eql(require("../fixtures/example-compact.json"));
 			});
 		});
 
@@ -84,7 +84,7 @@ describe("XML", function() {
 
 			describe("#ELEMENT", function() {
 				it("should compact objects properly", function() {
-					var object = JXON.convert(document);
+					var object = JXON.convert(document, false);
 					expect(JXON.compactors["#ELEMENT"](object)).to.eql(require("../fixtures/user-compact.json"));
 				});
 			});
@@ -92,7 +92,7 @@ describe("XML", function() {
 			describe("#ATTRIBUTE", function() {
 				it("should compact objects properly", function() {
 					var node = XML.query(document, "//here:contact[1]", {"here": "http://being.here/"})[0];
-					var object = JXON.convert(node);
+					var object = JXON.convert(node, false);
 					var proof = {
 						"contact": {
 							"#NAMESPACE": {
