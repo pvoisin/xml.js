@@ -25,10 +25,10 @@ function serialize(node) { ... //-> String
 function query(node, expression, resolver) { ... //-> [Node]
 ```
 
-####Examples
+####Example
 ```javascript
-XML.query(document, "//book[1]");
-XML.query(response, "//xyz:object/property[@name='title']", {"xyz": "http://xyz.com/1.0/"});
+XML.query(catalog, "//book[1]");
+XML.query(response, "//here:contact[1]",  {"here": "http://being.here/"});
 ```
 
 
@@ -41,7 +41,7 @@ function convert(node, [compact:true]) { ... //-> {Object}
 ```
 
 ####Example
-Given, `document` is the following:
+Given `document` is the following:
 ```xml
 <contact firstName="George" lastName="Cartier">
     <notes>
@@ -51,7 +51,7 @@ Given, `document` is the following:
     </notes>
 </contact>
 ```
-JXON object, converted with `JXON.convert(document)`, would be:
+Resulting JXON object, converted with `JXON.convert(document)`, would be:
 <a name="JXON_convert_result"></a>
 ```javascript
 {
@@ -109,4 +109,4 @@ When not compacted, [previous result](#JXON_convert_result) would be the followi
 
 ## More?
 
-Please have a look to the test [fixtures](blob/master/test/fixtures)!
+Please have a look to the test [fixtures](test/fixtures)!

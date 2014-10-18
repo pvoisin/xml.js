@@ -97,7 +97,16 @@ Object.defineProperty(JXON, "transformers", {
 				Utility.forEach(node.attributes, function(attribute) {
 					var transformer = transformers["#ATTRIBUTE"];
 					Utility.forOwn(transformer(attribute), function(value, name) {
-						properties[name] = value;
+						if(name.indexOf("@xmlns") === 0) {
+							var alias = name.split(":")[1];
+							if(!("#NAMESPACE" in properties)) {
+								properties["#NAMESPACE"] = {};
+							}
+							properties["#NAMESPACE"][alias || ""] = value;
+						}
+						else {
+							properties[name] = value;
+						}
 					});
 				});
 
@@ -230,6 +239,16 @@ Object.defineProperty(JXON, "compactors", {
 					if(attribute.charAt(0) === "@") {
 						attributes.push(attribute);
 						compactors["#ATTRIBUTE"](attribute, object);
+					}
+					else if(attribute === "#NAMESPACE") {
+						delete properties["#NAMESPACE"];
+						var keys = Object.keys(value);
+						if(keys.length) {
+							properties["#N"] = value;
+							if(keys.length === 1) {
+								properties["#N"] = value[keys[0]];
+							}
+						}
 					}
 				});
 

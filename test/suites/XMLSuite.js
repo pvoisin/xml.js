@@ -91,10 +91,23 @@ describe("XML", function() {
 
 			describe("#ATTRIBUTE", function() {
 				it("should compact objects properly", function() {
-					var node = XML.query(document, "//contact[1]")[0];
+					var node = XML.query(document, "//here:contact[1]", {"here": "http://being.here/"})[0];
 					var object = JXON.convert(node);
-					expect(object).to.eql({"contact":{"@firstName": "John", "@lastName": "Bird", children: []}});
-					expect(JXON.compactors["#ATTRIBUTE"]("@firstName", object)).to.eql({"contact":{"firstName": "John", "@lastName": "Bird", children: []}});
+					var proof = {
+						"contact": {
+							"#NAMESPACE": {
+								"": "http://being.here/",
+								"B": "http://B.b/"
+							},
+							"@firstName": "John",
+							"@lastName": "Bird",
+							children: []
+						}
+					};
+					expect(object).to.eql(proof);
+					proof.contact.firstName = proof.contact["@firstName"];
+					delete proof.contact["@firstName"];
+					expect(JXON.compactors["#ATTRIBUTE"]("@firstName", object)).to.eql(proof);
 				});
 			});
 

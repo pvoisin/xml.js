@@ -1,4 +1,5 @@
-<user id="123">
+<?xml version="1.0"?>
+<user id="123" xmlns:hidden="http://hidden.there/" xmlns:A="http://A.a/">
     <!-- Address: -->
     <address city="Montréal" country="Canada">
         1, pl. Ville-Marie
@@ -9,7 +10,7 @@
     <!-- Contacts: -->
     <!-- - - - - - -->
     <contacts>
-        <contact firstName="John" lastName="Bird"/>
+        <contact firstName="John" lastName="Bird" xmlns="http://being.here/" xmlns:B="http://B.b/"/>
         <contact firstName="George" lastName="Cartier">
             <notes>
                 <![CDATA[
@@ -17,7 +18,7 @@
                 ]]>
             </notes>
         </contact>
-        <contact firstName="Normand" lastName="Larivière">
+        <contact firstName="Normand" lastName="Larivière" xmlns="http://over.there/">
             <notes>
                 <![CDATA[
                     Friend of George.
