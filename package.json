@@ -1,6 +1,6 @@
 {
   "name": "xml.js",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "keywords": [
     "XML",
     "JXON",
@@ -20,8 +20,7 @@
   "dependencies": {
     "xmldom": "~0.1.19",
     "xpath": "0.0.7",
-    "lodash": "~2.4.1",
-    "xregexp": "~2.0.0"
+    "ytility": "0.0.2"
   },
   "scripts": {
     "test": "grunt test"

@@ -1,6 +1,6 @@
 var Path = require("path");
 var expect = require("expect.js");
-var Utility = require("../../source/Utility");
+var Utility = require("ytility");
 var XML = require("../../source/XML");
 var JXON = XML.JXON;
 

@@ -1,5 +1,5 @@
 var FileSystem = require("fs");
-var Utility = require("./Utility");
+var Utility = require("ytility");
 var DOM = require("xmldom");
 
 var XML = {
