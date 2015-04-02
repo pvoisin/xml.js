@@ -1,6 +1,6 @@
 {
-  "name": "xml.js",
-  "version": "0.0.8",
+  "name": "xmldom-xpath-wrapper",
+  "version": "0.0.9",
   "keywords": [
     "XML",
     "JXON",
@@ -9,7 +9,7 @@
   "authors": [
     "Pierre Voisin <pierre.voisin@gmail.com>"
   ],
-  "repository": "https://github.com/pvoisin/xml.js.git",
+  "repository": "https://github.com/solsson/xml.js",
   "main": "source/XML.js",
   "devDependencies": {
     "grunt": "~0.4.5",
