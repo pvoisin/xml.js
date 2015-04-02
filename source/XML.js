@@ -1,4 +1,3 @@
-var FileSystem = require("fs");
 var Utility = require("ytility");
 var DOM = require("xmldom");
 
@@ -15,12 +14,11 @@ var XML = {
 	},
 
 	/**
-	 * @param {String}  file      XML file to load.
+	 * @param {String}  document      formerly `String(require('fs').readFileSync(file))`
 	 * @param {Boolean} [convert] Tells whether the document should be converted into JXON.
 	 * @return {Document}
 	 */
-	load: function load(file, convert) {
-		var document = String(FileSystem.readFileSync(file));
+	load: function load(document, convert) {
 		document = XML.parse(document);
 
 		return convert ? JXON.convert(document, true) : document;
