@@ -33,9 +33,7 @@ XML.query(response, "//here:contact[1]",  {"here": "http://being.here/"});
 
 
 
-## JXON
-
-### convert
+### JXON#convert
 ```javascript
 function convert(node, [compact:true]) { ... //-> {Object}
 ```
@@ -69,7 +67,7 @@ Resulting JXON object, converted with `JXON.convert(document)`, would be:
 }
 ```
 
-### compact
+### JXON#compact
 ```javascript
 function compact(object) { ... //-> {Object}
 ```

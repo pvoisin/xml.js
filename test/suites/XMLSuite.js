@@ -1,8 +1,7 @@
 var Path = require("path");
 var expect = require("expect.js");
-var Utility = require("ytility");
 var XML = require("../../source/XML");
-var JXON = XML.JXON;
+var JXON = require("../../source/JXON");
 
 describe("XML", function() {
 	var fixture = Path.resolve(__dirname, "../fixtures/example.xml");
@@ -15,8 +14,8 @@ describe("XML", function() {
 		});
 
 		it("should load properly, into some JXON object", function() {
-			expect(XML.load(fixture, true)).to.eql(require("../fixtures/example-compact.json"));
-			expect(XML.load(Path.resolve(__dirname, "../fixtures/user.xml"), true)).to.eql(require("../fixtures/user-compact.json"));
+			expect(JXON.load(fixture)).to.eql(require("../fixtures/example-compact.json"));
+			expect(JXON.load(Path.resolve(__dirname, "../fixtures/user.xml"))).to.eql(require("../fixtures/user-compact.json"));
 		});
 	});
 
@@ -137,7 +136,62 @@ describe("XML", function() {
 			it("should compact JXON objects properly", function() {
 				var fixture = Path.resolve(__dirname, "../fixtures/user.xml");
 				var proof = require("../fixtures/user-compact.json");
-				expect(JXON.compact(XML.load(fixture, true))).to.eql(proof);
+				expect(JXON.compact(JXON.load(fixture))).to.eql(proof);
+			});
+		});
+
+		describe("serializers", function() {
+			var fixture = Path.resolve(__dirname, "../fixtures/user.xml");
+			var document = XML.load(fixture);
+
+			describe("#ELEMENT", function() {
+				it("should make nodes properly", function() {
+					var object = JXON.convert(document, false);
+					expect(JXON.compactors["#ELEMENT"](object)).to.eql(require("../fixtures/user-compact.json"));
+				});
+			});
+
+			describe("#ATTRIBUTE", function() {
+				it("should make nodes properly", function() {
+					var node = XML.query(document, "//here:contact[1]", {"here": "http://being.here/"})[0];
+					var object = JXON.convert(node, false);
+					var proof = {
+						"contact": {
+							"#NAMESPACE": {
+								"": "http://being.here/",
+								"B": "http://B.b/"
+							},
+							"@firstName": "John",
+							"@lastName": "Bird",
+							children: []
+						}
+					};
+					expect(object).to.eql(proof);
+					proof.contact.firstName = proof.contact["@firstName"];
+					delete proof.contact["@firstName"];
+					expect(JXON.compactors["#ATTRIBUTE"]("@firstName", object)).to.eql(proof);
+				});
+			});
+
+			describe("#TEXT", function() {
+				it("should compact objects properly", function() {
+					expect(JXON.compactors["#TEXT"]({"#TEXT": "\r\n??? \t"})).to.eql("???");
+					expect(JXON.compactors["#TEXT"]({"#TEXT": "\n\t \r"})).to.be(null);
+				});
+			});
+
+			describe("#CDATA", function() {
+				it("should compact objects properly", function() {
+					expect(JXON.compactors["#CDATA"]({"#CDATA": "\r\n??? \t"})).to.eql({"#D": "???"});
+					expect(JXON.compactors["#CDATA"]({"#CDATA": "\n\t \r"})).to.be(null);
+				});
+			});
+
+			describe("#COMMENT", function() {
+				it("should compact objects properly", function() {
+					expect(JXON.compactors["#COMMENT"]({"#COMMENT": "\r\n??? \t"})).to.eql({"#C": "???"});
+					expect(JXON.compactors["#COMMENT"]({"#COMMENT": "\n\t \r"})).to.be(null);
+				});
 			});
 		});
 	});
