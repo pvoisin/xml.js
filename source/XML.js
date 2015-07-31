@@ -1,6 +1,6 @@
 var FileSystem = require("fs");
 var DOM = require("xmldom");
-var XPath = require("xpath");
+var XPath = require("./XPath");
 
 
 var XML = {
@@ -38,14 +38,12 @@ var XML = {
 	/**
 	 * @param {Node}   node       Node to evaluate the expression against.
 	 * @param {String} expression X-Path expression to evaluate.
-	 * @param {Object} [resolver] Simple URI resolver like {"prefix": "http://...", ...}.
-	 *   Default namespace may be specified with the empty key: "".
+	 * @param {Object} [resolver] Simple URI resolver, like: `{"prefix": "http://...", ...}`.
+	 *    Default namespace may be specified with the empty key: "".
 	 * @return {Array} X-Path evaluation results.
 	 */
 	query: function query(node, expression, resolver) {
-		var evaluate = !!resolver && (typeof resolver == "object") ? XPath.useNamespaces(resolver) : XPath.select;
-
-		return evaluate(expression, node);
+		return XPath.evaluate(node, expression, resolver);
 	}
 };
 
