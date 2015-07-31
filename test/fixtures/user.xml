@@ -9,9 +9,9 @@
     TEXT
     <!-- Contacts: -->
     <!-- - - - - - -->
-    <contacts>
-        <contact firstName="John" lastName="Bird" xmlns="http://being.here/" xmlns:B="http://B.b/"/>
-        <contact firstName="George" lastName="Cartier">
+    <contacts xmlns:B="http://B.b/">
+        <contact firstName="John" lastName="Bird" xmlns="http://being.here/"/>
+        <contact firstName="George" lastName="Cartier" B:something="that">
             <notes>
                 <![CDATA[
                     Will call back tomorrow.

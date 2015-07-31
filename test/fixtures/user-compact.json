@@ -25,13 +25,13 @@
 			},
 			{
 				"contacts": {
+					"#N": {
+						"B": "http://B.b/"
+					},
 					"*": [
 						{
 							"contact": {
-								"#N": {
-									"": "http://being.here/",
-									"B": "http://B.b/"
-								},
+								"#N": "http://being.here/",
 								"firstName": "John",
 								"lastName": "Bird"
 							}
@@ -40,6 +40,7 @@
 							"contact": {
 								"firstName": "George",
 								"lastName": "Cartier",
+								"B:something": "that",
 								"*": {
 									"notes": {
 										"*": {

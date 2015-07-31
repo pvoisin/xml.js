@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE catalog SYSTEM "catalog.dtd">
-<catalog>
+<catalog xmlns:store="http://store">
     <!-- Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml -->
-    <product description="Cardigan Sweater">
+    <product description="Cardigan Sweater" store:addition="coupon">
         <catalog_item gender="Men's">
             <item_number>QWZ5671</item_number>
             <price>39.95</price>
@@ -24,7 +24,7 @@
             </size>
         </catalog_item>
     </product>
-    <script type="text/javascript"><![CDATA[function matchwo(a,b) {
+    <script type="text/javascript"><![CDATA[function(a, b) {
     if (a < b && a < 0) { return 1; }
     else { return 0; }
 }]]></script>

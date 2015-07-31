@@ -1,5 +1,8 @@
 {
 	"catalog": {
+		"#N": {
+			"store": "http://store"
+		},
 		"*": [
 			{
 				"#C": "Source: https://developer.mozilla.org/en-US/docs/JXON#example.xml"
@@ -7,6 +10,7 @@
 			{
 				"product": {
 					"description": "Cardigan Sweater",
+					"store:addition": "coupon",
 					"*": [
 						{
 							"catalog_item": {
@@ -93,7 +97,7 @@
 				"script": {
 					"type": "text/javascript",
 					"*": {
-						"#D": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
+						"#D": "function(a, b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
 					}
 				}
 			}

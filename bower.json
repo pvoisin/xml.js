@@ -1,0 +1,36 @@
+{
+  "name": "xml.js",
+  "version": "0.0.8",
+  "description": "XML.js provides helper functions for XML manipulation, including conversion of documents into JXON objects. It brings common XML-related features together into a simplistic API.",
+  "keywords": [
+    "XML",
+    "JXON",
+    "DOM"
+  ],
+  "authors": [
+    "Pierre Voisin <pierre.voisin@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pvoisin/xml.js.git#bower"
+  },
+  "main": "distribution/xml.js",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "~2.2.5",
+    "requirejs": "~2.1.18",
+    "expect": "~0.3.1",
+    "sinon": "http://sinonjs.org/releases/sinon-1.15.0.js",
+    "async": "~1.4.0"
+  },
+  "ignore": [
+    ".*",
+    "node_modules",
+    "bower_components",
+    "source",
+    "test",
+    "package.json",
+    "Gruntfile.js"
+  ]
+}
