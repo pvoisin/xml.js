@@ -10,7 +10,7 @@
     <!-- Contacts: -->
     <!-- - - - - - -->
     <contacts xmlns:B="http://B.b/">
-        <contact firstName="John" lastName="Bird" xmlns="http://being.here/"/>
+        <contact xmlns="http://being.here/" firstName="John" lastName="Bird"/>
         <contact firstName="George" lastName="Cartier" B:something="that">
             <notes>
                 <![CDATA[
@@ -18,7 +18,7 @@
                 ]]>
             </notes>
         </contact>
-        <contact firstName="Normand" lastName="Larivière" xmlns="http://over.there/">
+        <contact xmlns="http://over.there/" firstName="Normand" lastName="Larivière">
             <notes>
                 <![CDATA[
                     Friend of George.

@@ -1,5 +1,7 @@
 (function(global) {
 	function factory(y, XML) {
+		var DOM = XML.parse("<document/>").implementation;
+
 		var JXON = {
 			/**
 			 * @param {String}   locator     Locator of the XML file to load.
@@ -333,13 +335,36 @@
 
 						for(var tag in object) break;
 						var properties = object[tag];
-						var namespace = compact ? properties["#N"] : properties["#NAMESPACE"];
-console.log(namespace);
-						document = document || XML.parse("<fragment/>");
-// TODO: case when the element is within an aliased namespace
-						var element = namespace && namespace[""] ? document.createElementNS(namespace[""], tag) : document.createElement(tag);
 
-						var children = compact ? properties["*"] : properties["children"];
+						var parts = tag.split(":");
+						var name = parts[1] || parts[0];
+						if(parts[1]) {
+							var prefix = parts[0];
+							tag = prefix + ":" + name;
+						}
+
+						var namespaces = compact ? properties["#N"] : properties["#NAMESPACE"];
+						if(namespaces) {
+							// Case when no alias is defined at that node's level: it simply is the node's namespace URI.
+							if(typeof namespaces === "string") {
+								var namespace = namespaces;
+							}
+							else {
+								namespace = namespaces[""];
+							}
+						}
+
+						document = document || DOM.createDocument("", "document", null);
+
+						if(namespace) {
+							var element = document.createElementNS(namespace, tag);
+							element.setAttribute("xmlns", namespace);
+						}
+						else {
+							element = document.createElement(tag);
+						}
+
+						var children = (compact ? properties["*"] : properties["children"]) || [];
 
 						var index = 0;
 						while(index < children.length) {
@@ -359,9 +384,14 @@ console.log(namespace);
 								if(!compact && attribute[0] === "@") {
 									attribute = attribute.substring(1);
 								}
-
+// TODO: create #ATTRIBUTE nodes then append with `Element#setAttributeNode`
 								element.setAttribute(attribute, properties[key]);
 							}
+						}
+
+						// Register other namespaces:
+						for(var alias in namespaces) {
+							alias && element.setAttribute("xmlns:" + alias, namespaces[alias]);
 						}
 
 						return element;
