@@ -1,5 +1,8 @@
 {
 	"catalog": {
+		"#NAMESPACE": {
+			"store": "http://store"
+		},
 		"children": [
 			{
 				"#TEXT": "\n    "
@@ -13,6 +16,7 @@
 			{
 				"product": {
 					"@description": "Cardigan Sweater",
+					"@store:addition": "coupon",
 					"children": [
 						{
 							"#TEXT": "\n        "
@@ -218,7 +222,7 @@
 					"@type": "text/javascript",
 					"children": [
 						{
-							"#CDATA": "function matchwo(a,b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
+							"#CDATA": "function(a, b) {\n    if (a < b && a < 0) { return 1; }\n    else { return 0; }\n}"
 						}
 					]
 				}

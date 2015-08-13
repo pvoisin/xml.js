@@ -1,7 +1,11 @@
 # XML.js
+
 ## What for?
 XML.js provides helper functions for XML manipulation, including conversion of documents into [JXON](https://developer.mozilla.org/en-US/docs/JXON) objects.
-It is built on top of [xmldom](https://www.npmjs.org/package/xmldom) & [xpath](https://www.npmjs.org/package/xpath) modules and brings common XML-related features together into a simplistic API.
+It is built on top of browsers' [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation) and brings common XML-related features together into a simplistic API.
+
+4U2♥XML :)
+
 
 ## API
 
@@ -31,8 +35,7 @@ XML.query(catalog, "//book[1]");
 XML.query(response, "//here:contact[1]",  {"here": "http://being.here/"});
 ```
 
-
-
+<a name="JXON_convert"></a>
 ### JXON#convert
 ```javascript
 function convert(node, [compact:true]) { ... //-> {Object}
@@ -67,12 +70,14 @@ Resulting JXON object, converted with `JXON.convert(document)`, would be:
 }
 ```
 
+<a name="JXON_compact"></a>
 ### JXON#compact
 ```javascript
 function compact(object) { ... //-> {Object}
 ```
+
 ####Example
-When not compacted, [previous result](#JXON_convert_result) would be the following, which could be compacted afterwards with `JXON#compact`:
+When not compacted, [previous result](#JXON_convert_result) would be the following, which could be compacted afterwards with `[JXON#compact](#JXON_compact)`:
 ```javascript
 {
 	"contact": {
@@ -105,6 +110,9 @@ When not compacted, [previous result](#JXON_convert_result) would be the followi
 }
 ```
 
-## More?
+### JXON#revert
+Well... it is the opposite of `[JXON#compact](#JXON_compact)`. Try it! :)
 
+
+## More?
 Please have a look to the test [fixtures](test/fixtures)!

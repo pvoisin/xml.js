@@ -9,16 +9,16 @@
     TEXT
     <!-- Contacts: -->
     <!-- - - - - - -->
-    <contacts>
-        <contact firstName="John" lastName="Bird" xmlns="http://being.here/" xmlns:B="http://B.b/"/>
-        <contact firstName="George" lastName="Cartier">
+    <contacts xmlns:B="http://B.b/">
+        <contact xmlns="http://being.here/" firstName="John" lastName="Bird"/>
+        <contact firstName="George" lastName="Cartier" B:something="that">
             <notes>
                 <![CDATA[
                     Will call back tomorrow.
                 ]]>
             </notes>
         </contact>
-        <contact firstName="Normand" lastName="Larivière" xmlns="http://over.there/">
+        <contact xmlns="http://over.there/" firstName="Normand" lastName="Larivière">
             <notes>
                 <![CDATA[
                     Friend of George.
